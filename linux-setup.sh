@@ -74,6 +74,13 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt install -f -y  # Fix any dependency issues
 rm google-chrome-stable_current_amd64.deb
 
+# install bcompare
+echo "Installing Chrome....................................................................."
+wget https://www.scootersoftware.com/files/bcompare-4.4.7.28397_amd64.deb
+sudo dpkg -i bcompare-4.4.7.28397_amd64.deb
+sudo apt install -f -y  # Fix any dependency issues
+rm bcompare-4.4.7.28397_amd64.deb
+
 # sublime text install
 echo "Installing Sublime Text..............................................................."
 sudo snap install sublime-text --classic
