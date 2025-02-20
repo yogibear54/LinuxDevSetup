@@ -194,3 +194,7 @@ bindsym Control+0 exec --no-startup-id code
 # switch between the current and the previously focused one
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
+
+# monitor controls
+bindsym $mod+m exec --no-startup-id xrandr
+bindsym $mod+Sift+m exec --no-startup-id xrandr --output DP-1 --auto --left-of HDMI-0
