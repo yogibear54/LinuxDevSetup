@@ -190,11 +190,21 @@ bindsym Control+6 exec --no-startup-id postman
 bindsym Control+9 exec --no-startup-id mysql-workbench-community
 bindsym Control+0 exec --no-startup-id code
 
+# Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+# Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
 # workspace back and forth
 # switch between the current and the previously focused one
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
 
 # monitor controls
-bindsym $mod+m exec --no-startup-id xrandr
-bindsym $mod+Sift+m exec --no-startup-id xrandr --output DP-1 --auto --left-of HDMI-0
+#bindsym $mod+m exec --no-startup-id "xrandr"
+#bindsym $mod+Sift+m exec --no-startup-id "xrandr --output DP-1 --auto --left-of HDMI-0"
