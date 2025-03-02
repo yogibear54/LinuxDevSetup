@@ -121,6 +121,14 @@ rm mysql-workbench-community_8.0.36-1ubuntu22.04_amd64.deb
 echo "Mouse settings........................................................................"
 sudo cp ./linux-setup/40-libinput.conf /etc/X11/xorg.conf.d/
 
+# Setup keyboard detect and switch in i3
+sudo cp ./linux-setup/detect_usb_keyboard.sh ~/.config/i3/
+sudo cp ./linux-setup/switch_keyboard.sh ~/.config/i3/
+
+# Add switcher into users home directory
+sudo cp ./linux-setup/detect_usb_keyboard.sh ~/
+sudo cp ./linux-setup/switch_keyboard.sh ~/
+
 # Install Zsh and Oh My Zsh
 echo "Installing zsh........................................................................"
 sudo apt install zsh -y
