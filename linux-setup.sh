@@ -17,6 +17,7 @@ sudo apt install i3 -y
 # Move i3 config to .config/i3/
 echo "Copying i3config......................................................................"
 if [ -f ./linux-setup/i3config ]; then
+  mkdir -p ~/.config/i3/
   cp ./linux-setup/i3config ~/.config/i3/config
 else
   echo "i3 config file not found. Skipping."
