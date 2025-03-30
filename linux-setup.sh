@@ -82,6 +82,10 @@ sudo dpkg -i bcompare-4.4.7.28397_amd64.deb
 sudo apt install -f -y  # Fix any dependency issues
 rm bcompare-4.4.7.28397_amd64.deb
 
+# install snap
+echo "Installing snap......................................................................."
+sudo apt install snapd -y
+
 # sublime text install
 echo "Installing Sublime Text..............................................................."
 sudo snap install sublime-text --classic
@@ -92,17 +96,12 @@ sudo snap install postman
 
 # vscode
 echo "Installing VSCode....................................................................."
-sudo snap install --classic code
+sudo snap install code --classic
 
 # Download cursor
 echo "Installing Cursor....................................................................."
 sudo apt install libfuse2 -y
-
-if [ -f ./install-cursor.sh ]; then
-  ./install-cursor.sh
-else
-  echo "Cursor installation script not found. Skipping."
-fi
+./install-cursor.sh
 
 # Install DBeaver
 echo "Installing Dbeaver...................................................................."
@@ -141,6 +140,11 @@ chmod +x install.sh
 ./install.sh
 rm install.sh
 
+# install picom (for machines with screen tearing)
+# also, mv from ./linux-setup/picom.conf -> ~/.config/
+# mv ./linux-setup/picom.conf ~/.config/
+# sudo apt install picom -y
+
 # Show plugins to add on later
 echo "Plugins to add on later:"
 echo "https://ohmyz.sh/#install"
@@ -175,7 +179,7 @@ fi
 # Optional: Run p10k configure
 read -p "Do you want to run 'p10k configure' now? (y/n): " run_p10k
 if [ "$run_p10k" == "y" ]; then
-  p10k configure
+  zsh
 fi
 
 echo ""
