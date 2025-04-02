@@ -17,6 +17,7 @@ sudo apt install i3 -y
 # Move i3 config to .config/i3/
 echo "Copying i3config......................................................................"
 if [ -f ./linux-setup/i3config ]; then
+  mkdir -p ~/.config/i3/
   cp ./linux-setup/i3config ~/.config/i3/config
 else
   echo "i3 config file not found. Skipping."
@@ -81,6 +82,10 @@ sudo dpkg -i bcompare-4.4.7.28397_amd64.deb
 sudo apt install -f -y  # Fix any dependency issues
 rm bcompare-4.4.7.28397_amd64.deb
 
+# install snap
+echo "Installing snap......................................................................."
+sudo apt install snapd -y
+
 # sublime text install
 echo "Installing Sublime Text..............................................................."
 sudo snap install sublime-text --classic
@@ -91,17 +96,12 @@ sudo snap install postman
 
 # vscode
 echo "Installing VSCode....................................................................."
-sudo snap install --classic code
+sudo snap install code --classic
 
 # Download cursor
 echo "Installing Cursor....................................................................."
 sudo apt install libfuse2 -y
-
-if [ -f ./install-cursor.sh ]; then
-  ./install-cursor.sh
-else
-  echo "Cursor installation script not found. Skipping."
-fi
+./install-cursor.sh
 
 # Install DBeaver
 echo "Installing Dbeaver...................................................................."
@@ -121,6 +121,14 @@ rm mysql-workbench-community_8.0.36-1ubuntu22.04_amd64.deb
 echo "Mouse settings........................................................................"
 sudo cp ./linux-setup/40-libinput.conf /etc/X11/xorg.conf.d/
 
+# Setup keyboard detect and switch in i3
+sudo cp ./linux-setup/detect_usb_keyboard.sh ~/.config/i3/
+sudo cp ./linux-setup/switch_keyboard.sh ~/.config/i3/
+
+# Add switcher into users home directory
+sudo cp ./linux-setup/detect_usb_keyboard.sh ~/
+sudo cp ./linux-setup/switch_keyboard.sh ~/
+
 # Install Zsh and Oh My Zsh
 echo "Installing zsh........................................................................"
 sudo apt install zsh -y
@@ -131,6 +139,11 @@ wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 chmod +x install.sh
 ./install.sh
 rm install.sh
+
+# install picom (for machines with screen tearing)
+# also, mv from ./linux-setup/picom.conf -> ~/.config/
+# mv ./linux-setup/picom.conf ~/.config/
+# sudo apt install picom -y
 
 # Show plugins to add on later
 echo "Plugins to add on later:"
@@ -166,7 +179,7 @@ fi
 # Optional: Run p10k configure
 read -p "Do you want to run 'p10k configure' now? (y/n): " run_p10k
 if [ "$run_p10k" == "y" ]; then
-  p10k configure
+  zsh
 fi
 
 echo ""

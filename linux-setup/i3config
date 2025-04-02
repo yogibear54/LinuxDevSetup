@@ -206,5 +206,9 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
 
 # monitor controls
-#bindsym $mod+m exec --no-startup-id "xrandr"
-#bindsym $mod+Sift+m exec --no-startup-id "xrandr --output DP-1 --auto --left-of HDMI-0"
+# bindsym $mod+m exec --no-startup-id "xrandr"
+# bindsym $mod+Sift+m exec --no-startup-id "xrandr --output DP-1 --auto --left-of HDMI-0"
+# exec --no-startup-id ~/.config/i3/detect_usb_keyboard.sh
+
+# removes artifacts if any - G14 has it.
+# exec --no-startup-id picom --experimental-backends --config ~/.config/picom.conf
