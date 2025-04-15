@@ -94,6 +94,14 @@ sudo snap install sublime-text --classic
 echo "Installing Postman...................................................................."
 sudo snap install postman
 
+# pavucontrol
+echo "Installing pavucontrol................................................................"
+sudo apt install pavucontrol
+
+# blueman-applet
+echo "Installing blueman-applet............................................................."
+sudo apt install blueman
+
 # vscode
 echo "Installing VSCode....................................................................."
 sudo snap install code --classic
@@ -102,6 +110,11 @@ sudo snap install code --classic
 echo "Installing Cursor....................................................................."
 sudo apt install libfuse2 -y
 ./install-cursor.sh
+
+# Update Cursor directory permissions
+echo "Updating Cursor directory permissions................................................."
+sudo chown -R $USER:$USER /opt/cursor/
+
 
 # Install DBeaver
 echo "Installing Dbeaver...................................................................."
