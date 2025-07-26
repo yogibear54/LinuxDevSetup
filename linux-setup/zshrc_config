@@ -149,7 +149,7 @@ unset __conda_setup
 
 # this depends on cursor being installed
 function cursor() {
-    /opt/cursor.appimage &!
+    /opt/cursor/sursor.appimage "$@" &!
 }
 
 export FZF_DEFAULT_COMMAND='fd'
