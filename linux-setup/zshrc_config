@@ -152,6 +152,14 @@ function cursor() {
     /opt/cursor/sursor.appimage "$@" &!
 }
 
+function suspend() {
+    sudo systemctl suspend
+}
+
+function sleep() {
+    xset dpms force off
+}
+
 export FZF_DEFAULT_COMMAND='fd'
 
 export NVM_DIR="$HOME/.nvm"
