@@ -152,6 +152,111 @@ function cursor() {
     /opt/cursor/sursor.appimage "$@" &!
 }
 
+# Smart "bat": browse dirs with fzf + bat preview
+# - Enter: open in Vim (default)
+# - Ctrl-B: open in batcat
+# - Ctrl-O: open in Cursor (if installed)
+# - Ctrl-E: open in VS Code (if installed)
+# - Selecting a directory with Enter navigates into it
+function bat() {
+  emulate -L zsh
+  setopt pipefail
+
+  # Choose terminal editor: $EDITOR first, then nvim, then vim
+  local term_editor="${EDITOR:-}"
+  if [[ -z "$term_editor" ]]; then
+    if command -v nvim >/dev/null 2>&1; then
+      term_editor="nvim"
+    elif command -v vim >/dev/null 2>&1; then
+      term_editor="vim"
+    else
+      print -u2 "No terminal editor found (nvim/vim). Set \$EDITOR."
+      return 127
+    fi
+  fi
+
+  # GUI editors
+  local cursor_cmd="" code_cmd=""
+  command -v cursor >/dev/null 2>&1 && cursor_cmd="cursor"
+  command -v code   >/dev/null 2>&1 && code_cmd="code"
+
+  # Optional flag to show directories even if a folder wasn't passed
+  local show_dirs=false
+  if [[ "$1" == "--show-dirs" ]]; then
+    show_dirs=true
+    shift
+  fi
+
+  # If a directory is given OR --show-dirs is used, launch picker
+  if [[ "$show_dirs" == true || ( -n "$1" && -d "$1" ) ]]; then
+    local dir="${1:-.}"
+    shift
+
+    while true; do
+      local out key
+      local IFS=$'\n'
+
+      out=$(
+        find "$dir" \( -type f -o -type d \) -not -path '*/.git/*' 2>/dev/null \
+          | fzf --multi --height=80% --reverse \
+                --header=$'Enter: open in Vim  |  Ctrl-B: open in batcat  |  Ctrl-O: Cursor  |  Ctrl-E: VS Code\nSelect a folder and press Enter to navigate.' \
+                --expect=enter,ctrl-b,ctrl-o,ctrl-e \
+                --preview '[[ -d {} ]] && ls -la --color=always {} || batcat --style=numbers --color=always {} 2>/dev/null || head -100 {}' \
+                --preview-window=right:60%:wrap
+      ) || return 1
+
+      [[ -z "$out" ]] && return 1
+      key=${out%%$'\n'*}
+      local -a picks=("${(@f)${out#*$'\n'}}")
+
+      # Enter on a single directory = drill down
+      if [[ "$key" == "enter" && ${#picks[@]} -eq 1 && -d "${picks[1]}" ]]; then
+        dir="${picks[1]}"
+        continue
+      fi
+
+      # Act on selection
+      case "$key" in
+        enter)
+          "$term_editor" "${picks[@]}" "$@"
+          ;;
+        ctrl-b)
+          # Show in bat; open multiple sequentially
+          batcat "${picks[@]}"
+          ;;
+        ctrl-o)
+          if [[ -n "$cursor_cmd" ]]; then
+            "$cursor_cmd" "${picks[@]}"
+          else
+            print -u2 "Cursor not found."; return 127
+          fi
+          ;;
+        ctrl-e)
+          if [[ -n "$code_cmd" ]]; then
+            "$code_cmd" "${picks[@]}"
+          else
+            print -u2 "VS Code (code) not found."; return 127
+          fi
+          ;;
+        *)
+          "$term_editor" "${picks[@]}" "$@"
+          ;;
+      esac
+      break
+    done
+    return $?
+  fi
+
+  # If a file is passed directly, open in Vim by default
+  if [[ -n "$1" && -e "$1" ]]; then
+    "$term_editor" "$@"
+    return $?
+  fi
+
+  # Otherwise, just pass through to batcat (keeps original CLI behavior when piping/stdin)
+  batcat "$@"
+}
+
 function suspend() {
     sudo systemctl suspend
 }
