@@ -215,8 +215,10 @@ bindsym $mod+Shift+Tab move container to workspace back_and_forth
 
 # removes artifacts if any - G14 has it.
 # exec --no-startup-id picom --experimental-backends --config ~/.config/picom.conf
-# exec --no-startup-id blueman-applet
-#
+
+# bluetooth setup
+exec --no-startup-id blueman-applet
+
 # set monitor (0-255)
 # sudo brightnessctl -d amdgpu_bl1 set 25 # normal lowlight
 # sudo brightnessctl -d amdgpu_bl1 set 200 # bright in high light area
