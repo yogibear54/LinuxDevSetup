@@ -108,12 +108,13 @@ sudo snap install code --classic
 
 # Download cursor
 echo "Installing Cursor....................................................................."
-sudo apt install libfuse2 -y
-./install-cursor.sh
+#sudo apt install libfuse2 -y
+#./install-cursor.sh
+# Install cursor directly from site based on their instruction. cursor.com
 
 # Update Cursor directory permissions
-echo "Updating Cursor directory permissions................................................."
-sudo chown -R $USER:$USER /opt/cursor/
+# echo "Updating Cursor directory permissions................................................."
+# sudo chown -R $USER:$USER /opt/cursor/
 
 
 # Install DBeaver
