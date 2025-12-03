@@ -82,6 +82,10 @@ sudo dpkg -i bcompare-4.4.7.28397_amd64.deb
 sudo apt install -f -y  # Fix any dependency issues
 rm bcompare-4.4.7.28397_amd64.deb
 
+# install brightness ctl
+echo "Installing Brightnessctl.............................................................."
+sudo apt install brightnessctl -y
+
 # install snap
 echo "Installing snap......................................................................."
 sudo apt install snapd -y
