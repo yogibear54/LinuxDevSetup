@@ -90,6 +90,9 @@ sudo apt install brightnessctl -y
 echo "Installing snap......................................................................."
 sudo apt install snapd -y
 
+# install maim and xclip
+sudo apt install maim xclip -y
+
 # sublime text install
 echo "Installing Sublime Text..............................................................."
 sudo snap install sublime-text --classic
