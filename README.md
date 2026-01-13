@@ -20,19 +20,19 @@ This package contains scripts and configuration files to automate the setup of a
 
 ## ⚠️ Important: Hardcoded Username
 
-**CRITICAL:** The `linux-setup/zshrc_config` file contains hardcoded references to the username `your-own-username`. 
+**CRITICAL:** The `linux-setup/zshrc_config` file contains hardcoded references to the username `your-own-usename`. 
 
 **Before using this package, you MUST:**
 1. Open `linux-setup/zshrc_config` in a text editor
-2. Search and replace all instances of `your-own-username` with your own username
+2. Search and replace all instances of `your-own-usename` with your own username
 3. The affected lines are:
-   - Line 12: `export ZSH="/home/your-own-username/.oh-my-zsh"`
-   - Line 133: `export PATH="$PATH:/home/your-own-username/.local/bin"`
-   - Line 137: `__conda_setup="$('/home/your-own-username/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"`
-   - Line 141: `if [ -f "/home/your-own-username/anaconda3/etc/profile.d/conda.sh" ]; then`
-   - Line 144: `export PATH="/home/your-own-username/anaconda3/bin:$PATH"`
+   - Line 12: `export ZSH="/home/your-own-usename/.oh-my-zsh"`
+   - Line 133: `export PATH="$PATH:/home/your-own-usename/.local/bin"`
+   - Line 137: `__conda_setup="$('/home/your-own-usename/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"`
+   - Line 141: `if [ -f "/home/your-own-usename/anaconda3/etc/profile.d/conda.sh" ]; then`
+   - Line 144: `export PATH="/home/your-own-usename/anaconda3/bin:$PATH"`
 
-**Note:** The main setup script (`linux-setup.sh`) also expects the home directory to be `/home/your-own-username/`. If your username is different, you'll need to modify the script or ensure the paths are updated accordingly.
+**Note:** The main setup script (`linux-setup.sh`) also assumes the home directory is `/home/your-own-usename/`. If your username is different, update the paths or adjust the script before running it.
 
 ## Installation Instructions
 
@@ -44,7 +44,7 @@ This package contains scripts and configuration files to automate the setup of a
 
 2. **Update the zshrc_config file:**
    - Open `linux-setup/zshrc_config`
-   - Replace all instances of `your-own-username` with your username (see Important section above)
+   - Replace all instances of `your-own-usename` with your username (see Important section above)
 
 3. **Run the main setup script:**
    ```bash
@@ -89,10 +89,10 @@ This package contains scripts and configuration files to automate the setup of a
 - **Sublime Text** - Text editor (via snap)
 - **Postman** - API testing tool (via snap)
 - **VS Code** - Code editor (via snap)
-- **Cursor** - AI-powered code editor (AppImage)
 - **DBeaver** - Database management tool
 - **MySQL Workbench** - MySQL database administration
 - **Beyond Compare** - File comparison tool
+- **Cursor** - AI-powered code editor (must be installed manually from cursor.com; the helper script was removed)
 
 ### System Utilities
 - **pavucontrol** - PulseAudio volume control
@@ -100,6 +100,8 @@ This package contains scripts and configuration files to automate the setup of a
 - **snapd** - Snap package manager
 - **htop** - Process monitor
 - **wget, curl** - Download utilities
+- **brightnessctl** - Display brightness control
+- **maim, xclip** - Screenshot and clipboard tools
 
 ## Script Documentation
 
@@ -122,17 +124,8 @@ The main installation script that orchestrates the entire setup process:
 ./linux-setup.sh
 ```
 
-#### `install-cursor.sh`
-Installs Cursor IDE as an AppImage:
-- Downloads Cursor AppImage to `/opt/cursor/cursor.appimage`
-- Downloads Cursor icon
-- Creates desktop entry for application menu
-- Installs libfuse2 dependency if needed
-
-**Usage:**
-```bash
-./install-cursor.sh
-```
+#### Cursor installation (manual)
+The helper script was removed. Install Cursor by following the instructions at https://cursor.com (AppImage). If you install it to `/opt/cursor/cursor.appimage`, the existing i3 bindings and startup script will pick it up.
 
 #### `desktop-startup.sh`
 Launches multiple applications in i3 workspace 1:
@@ -271,6 +264,22 @@ Calculates and displays the total size of all Docker volumes in GB. Parses `dock
 ```bash
 ./misc-scripts/docker-volume-size.sh
 ```
+
+#### `misc-scripts/set-brightness.sh`
+Sets display brightness using `brightnessctl`. Accepts absolute values or percentages (e.g., `10%` or `31225`).
+
+**Usage:**
+```bash
+./misc-scripts/set-brightness.sh 10%
+./misc-scripts/set-brightness.sh 30000
+```
+
+#### OBS screen recording helpers
+- `misc-scripts/obs-screen-recording/obs/start.sh` — launches OBS via Flatpak.
+- `misc-scripts/obs-screen-recording/obs/zoom-to-mouse.md` — notes for configuring zoom/follow-mouse hotkeys.
+- `misc-scripts/obs-screen-recording/screenkey/install.md` — reference link for Screenkey setup.
+- `misc-scripts/obs-screen-recording/screenkey/settings.sh` — opens Screenkey settings UI.
+- `misc-scripts/obs-screen-recording/screenkey/start.sh` — starts Screenkey overlay.
 
 ## Post-Installation
 
