@@ -82,9 +82,16 @@ sudo dpkg -i bcompare-4.4.7.28397_amd64.deb
 sudo apt install -f -y  # Fix any dependency issues
 rm bcompare-4.4.7.28397_amd64.deb
 
+# install brightness ctl
+echo "Installing Brightnessctl.............................................................."
+sudo apt install brightnessctl -y
+
 # install snap
 echo "Installing snap......................................................................."
 sudo apt install snapd -y
+
+# install maim and xclip
+sudo apt install maim xclip -y
 
 # sublime text install
 echo "Installing Sublime Text..............................................................."
@@ -108,12 +115,13 @@ sudo snap install code --classic
 
 # Download cursor
 echo "Installing Cursor....................................................................."
-sudo apt install libfuse2 -y
-./install-cursor.sh
+#sudo apt install libfuse2 -y
+#./install-cursor.sh
+# Install cursor directly from site based on their instruction. cursor.com
 
 # Update Cursor directory permissions
-echo "Updating Cursor directory permissions................................................."
-sudo chown -R $USER:$USER /opt/cursor/
+# echo "Updating Cursor directory permissions................................................."
+# sudo chown -R $USER:$USER /opt/cursor/
 
 
 # Install DBeaver
