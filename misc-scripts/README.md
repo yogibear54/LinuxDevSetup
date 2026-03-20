@@ -12,6 +12,7 @@ Collection of utility scripts for Linux system management and application automa
 | **audio-settings.sh** | Open PulseAudio Volume Control (pavucontrol) GUI |
 | **bluetooth-settings.sh** | Launch Blueman Bluetooth manager applet |
 | **docker-volume-size.sh** | Calculate and display total Docker volume size in GB |
+| **view-markdown.sh** | View markdown files in browser with GitHub-style formatting, syntax highlighting, and Mermaid diagrams. Auto-detects system theme (light/dark) |
 
 ## OBS Screen Recording
 
