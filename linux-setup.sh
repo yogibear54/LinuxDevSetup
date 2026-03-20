@@ -86,6 +86,10 @@ rm bcompare-4.4.7.28397_amd64.deb
 echo "Installing Brightnessctl.............................................................."
 sudo apt install brightnessctl -y
 
+# install ripgrep
+echo "Installing ripgrep...................................................................."
+sudo apt install ripgrep -y
+
 # install snap
 echo "Installing snap......................................................................."
 sudo apt install snapd -y
