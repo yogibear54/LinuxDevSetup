@@ -25,7 +25,7 @@ fi
 
 # Install software
 echo "Installing wget, git, htop, vim......................................................."
-sudo apt install wget git htop vim curl php-cli unzip fd-find -y
+sudo apt install wget git htop vim curl php-cli unzip fd-find bat -y
 
 # Install dev packages
 # npm + node
