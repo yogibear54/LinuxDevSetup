@@ -105,6 +105,10 @@ sudo snap install sublime-text --classic
 echo "Installing Postman...................................................................."
 sudo snap install postman
 
+# glow - cli markdown reader
+echo "Installing Glow......................................................................."
+sudo snap install glow
+
 # pavucontrol
 echo "Installing pavucontrol................................................................"
 sudo apt install pavucontrol
